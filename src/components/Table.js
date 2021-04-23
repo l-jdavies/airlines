@@ -1,23 +1,37 @@
 import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 
 
-const Table = ({columns, rows}) => {
+const Table = () => {
+  const headers = ["Airline", "Source Airport", "Destination Airport"]
+  const headerCells = headers.map((header) => <th key={header}>{header}</th>)
 
-  /*
+  const routes = useSelector(state => state.routes.routes).slice(0, 20)
+  console.log(routes)
+
+  const bodyCells = routes.map(routeObj => {
     return (
-      <div>
-        <table className={className}>
-          <thead>
-            <tr>{headerCells}</tr>
-          </thead>
-          <tbody>{bodyRows}</tbody>
-        </table>
-  
-      </div>
-    );
-    */
+      <tr key={Object.values(routeObj).join(":")}>
+        <td key={`airline:${routeObj.airline}`}>{routeObj.airline}</td>
+        <td key={`src:${routeObj.src}`}>{routeObj.src}</td>
+        <td key={`dest:${routeObj.dest}`}>{routeObj.dest}</td>
+      </tr>
+    )
+  })
+  return (
+    <div>
+      <table className="routes-table">
+        <thead>
+          <tr>{headerCells}</tr>
+        </thead>
+        <tbody>{bodyCells}</tbody>
+      </table>
+
+    </div>
+  );
+
 }
+export default Table
 
 /*
  * <div className="pagination">

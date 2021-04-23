@@ -1,15 +1,12 @@
-export const initializeRoutes = (routes) => {
-  return {
-    type: 'SET_ROUTES',
-    routes,
-    search: ""
-  }
+import Data from '../data'
+
+const initialData = {
+  routes: Data.routes,
+  search: ""
 }
 
-const routeReducer = (state = {}, action) => {
+const routeReducer = (state = initialData, action) => {
   switch (action.type) {
-    case 'SET_ROUTES':
-      return Object.assign({}, {routes: action.routes, search: action.search})
     case 'SET_ROUTE_SEARCH':
       return Object.assign({}, state, {search: action.search})
     default:

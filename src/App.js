@@ -1,24 +1,11 @@
+import './App.css'
 import React, {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import Table from './components/Table'
 import Select from './components/Select'
-import Data from './data'
-import {initializeRoutes} from './reducers/routeReducer'
-import {initializeAirlines} from './reducers/airlineReducer'
-import {initializeAirports} from './reducers/airportReducer'
 
 const App = () => {
 
-  const routes = Data.routes
-  const airlines = Data.airlines
-  const airports = Data.airports
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(initializeRoutes(routes))
-    dispatch(initializeAirlines(airlines))
-    dispatch(initializeAirports(airports))
-  }, [])
 
   return (
     <div>
@@ -27,7 +14,7 @@ const App = () => {
           <h1 className="title">Airline Routes</h1>
         </header>
         <section>
-          <Select />
+          <Table />
         </section>
       </div >
     </div>
