@@ -1,20 +1,21 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
+import {GetAirlineById, GetAirportByCode} from '../actions/dataTransformation'
 
 
 const Table = () => {
   const headers = ["Airline", "Source Airport", "Destination Airport"]
   const headerCells = headers.map((header) => <th key={header}>{header}</th>)
 
-  const routes = useSelector(state => state.routes.routes).slice(0, 20)
+  const routes = useSelector(state => state.routes.data).slice(0, 20)
   console.log(routes)
 
   const bodyCells = routes.map(routeObj => {
     return (
       <tr key={Object.values(routeObj).join(":")}>
-        <td key={`airline:${routeObj.airline}`}>{routeObj.airline}</td>
-        <td key={`src:${routeObj.src}`}>{routeObj.src}</td>
-        <td key={`dest:${routeObj.dest}`}>{routeObj.dest}</td>
+        <td key={`airline:${routeObj.airline}`}>{GetAirlineById(routeObj.airline)}</td>
+        <td key={`src:${routeObj.src}`}>{GetAirportByCode(routeObj.src)}</td>
+        <td key={`dest:${routeObj.dest}`}>{GetAirportByCode(routeObj.dest)}</td>
       </tr>
     )
   })

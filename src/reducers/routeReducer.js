@@ -1,7 +1,7 @@
 import Data from '../data'
 
 const initialData = {
-  routes: Data.routes,
+  data: Data.routes,
   search: ""
 }
 

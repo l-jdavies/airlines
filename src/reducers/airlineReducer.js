@@ -1,7 +1,7 @@
 import Data from '../data'
 
 const initialData = {
-  airlines: Data.airlines,
+  data: Data.airlines,
   search: ""
 }
 
