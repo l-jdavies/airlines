@@ -5,8 +5,7 @@ const Table = ({routes, columns, format}) => {
   const headerCells = columns.map((header) => <th key={header.property}>{header.name}</th>)
 
 
-  console.log(routes())
-  const bodyCells = routes().map(routeObj => {
+  const bodyCells = routes.map(routeObj => {
     console.log(routeObj)
     return (
       <tr key={Object.values(routeObj).join(":")}>

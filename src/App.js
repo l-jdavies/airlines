@@ -8,10 +8,11 @@ import {getAirlineById, getAirportByCode} from './data'
 
 
 const App = () => {
-  const [pageNumber, setPageNumber] = useState(1)
+  const [pageNumber, setPageNumber] = useState(0)
   const [perPage, setPerPage] = useState(25)
   const [selectedAirline, setSelectedAirline] = useState(0)
   const [selectedAirport, setSelectedAirport] = useState("all")
+
 
   const formatValue = (property, value) => {
     if (property === "airline") {
@@ -32,6 +33,16 @@ const App = () => {
         (route.src === selectedAirport || selectedAirport === "all")
     })
   }
+
+  const totalRoutes = getSelectedRoutes().length
+  const sliceEnd = pageNumber + 1 * perPage
+  const startDisplay = pageNumber * perPage
+  const endDisplay = startDisplay + perPage
+
+  const getRoutesByPage = () => {
+    return getSelectedRoutes().slice(pageNumber, sliceEnd)
+  }
+
   return (
     <div>
       <div className="app">
@@ -40,9 +51,17 @@ const App = () => {
         </header>
         <section>
           <Table
-            routes={getSelectedRoutes}
+            routes={getRoutesByPage()}
             columns={columns}
             format={formatValue}
+          />
+          <Pagination
+            pageNumber={pageNumber}
+            totalRoutes={totalRoutes}
+            setPageNumber={setPageNumber}
+            perPage={perPage}
+            start={startDisplay}
+            end={endDisplay}
           />
         </section>
       </div >
