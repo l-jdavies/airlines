@@ -1,24 +1,22 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
-import {GetAirlineById, GetAirportByCode} from '../actions/dataTransformation'
 
 
-const Table = () => {
-  const headers = ["Airline", "Source Airport", "Destination Airport"]
-  const headerCells = headers.map((header) => <th key={header}>{header}</th>)
+const Table = ({routes, columns, format}) => {
+  const headerCells = columns.map((header) => <th key={header.property}>{header.name}</th>)
 
-  const routes = useSelector(state => state.routes.data).slice(0, 20)
-  console.log(routes)
 
-  const bodyCells = routes.map(routeObj => {
+  console.log(routes())
+  const bodyCells = routes().map(routeObj => {
+    console.log(routeObj)
     return (
       <tr key={Object.values(routeObj).join(":")}>
-        <td key={`airline:${routeObj.airline}`}>{GetAirlineById(routeObj.airline)}</td>
-        <td key={`src:${routeObj.src}`}>{GetAirportByCode(routeObj.src)}</td>
-        <td key={`dest:${routeObj.dest}`}>{GetAirportByCode(routeObj.dest)}</td>
+        <td key={`airline:${routeObj.airline}`}>{format('airline', routeObj.airline)}</td>
+        <td key={`src:${routeObj.src}`}>{format('airport', routeObj.src)}</td>
+        <td key={`dest:${routeObj.dest}`}>{format('airport', routeObj.dest)}</td>
       </tr>
     )
   })
+
   return (
     <div>
       <table className="routes-table">
