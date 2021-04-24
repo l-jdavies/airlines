@@ -27,10 +27,30 @@ const App = () => {
     {name: "Destination Airport", property: "dest"}
   ]
 
+  const displayAll = (selectedAirline === 0) && (selectedAirport === "all")
+
   const getSelectedRoutes = () => {
     return Data.routes.filter(route => {
       return (route.airline === selectedAirline || selectedAirline === 0) &&
         (route.src === selectedAirport || selectedAirport === "all")
+    })
+  }
+
+  const getSelectedAirlines = () => {
+    Data.airlines.map(airline => {
+      const display = !!getSelectedRoutes().find(
+        route => route.airline === airline.id
+      )
+      return Object.assign({}, airline, {display})
+    })
+  }
+
+  const getSelectedAirports = () => {
+    Data.airports.map(airport => {
+      const display = !!getSelectedRoutes().find(
+        route => route.src === airport.code || route.dest === airport.code
+      )
+      return Object.assign({}, airport, {display})
     })
   }
 
@@ -50,6 +70,7 @@ const App = () => {
           <h1 className="title">Airline Routes</h1>
         </header>
         <section>
+          <Select />
           <Table
             routes={getRoutesByPage()}
             columns={columns}
