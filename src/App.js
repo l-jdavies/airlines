@@ -80,6 +80,9 @@ const App = () => {
     setSelectedAirport("all")
   }
 
+  const defaultsSelected = () => {
+    return selectedAirline === 0 && selectedAirport === "all"
+  }
 
   return (
     <div>
@@ -93,7 +96,8 @@ const App = () => {
             airports={getSelectedAirports}
             selectedAirline={airlineSelected}
             selectedAirport={airportSelected}
-            reset={resetFilters}
+            enableReset={resetFilters}
+            disableReset={defaultsSelected()}
           />
           <Table
             routes={getRoutesByPage()}

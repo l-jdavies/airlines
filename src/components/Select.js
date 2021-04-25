@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Select = ({airlines, airports, selectedAirline, selectedAirport, reset}) => {
+const Select = ({airlines, airports, selectedAirline, selectedAirport, enableReset, disableReset}) => {
   const airlineOptions = airlines().map(airline => {
     const value = airline.id
     const disable = !airline.display
@@ -41,6 +41,11 @@ const Select = ({airlines, airports, selectedAirline, selectedAirport, reset}) =
     selectedAirport(event.target.value)
   }
 
+  const resetFilters = (event) => {
+    event.preventDefault()
+    enableReset()
+  }
+
   return (
     <>
       <p>Show routes on</p>
@@ -51,6 +56,9 @@ const Select = ({airlines, airports, selectedAirline, selectedAirport, reset}) =
       <select name="airport" onChange={selectAirport}>
         {airportOptions}
       </select>
+      <button onClick={resetFilters} disabled={disableReset}>
+        Show All Routes
+    </button>
     </>
   )
 
