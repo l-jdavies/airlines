@@ -6,7 +6,6 @@ const Table = ({routes, columns, format}) => {
 
 
   const bodyCells = routes.map(routeObj => {
-    console.log(routeObj)
     return (
       <tr key={Object.values(routeObj).join(":")}>
         <td key={`airline:${routeObj.airline}`}>{format('airline', routeObj.airline)}</td>

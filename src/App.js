@@ -9,7 +9,7 @@ import {getAirlineById, getAirportByCode} from './data'
 
 const App = () => {
   const [pageNumber, setPageNumber] = useState(0)
-  const [perPage, setPerPage] = useState(25)
+  const [perPage, _] = useState(25)
   const [selectedAirline, setSelectedAirline] = useState(0)
   const [selectedAirport, setSelectedAirport] = useState("all")
 
@@ -37,21 +37,25 @@ const App = () => {
   }
 
   const getSelectedAirlines = () => {
-    Data.airlines.map(airline => {
+    let arr = []
+    Data.airlines.forEach(airline => {
       const display = !!getSelectedRoutes().find(
         route => route.airline === airline.id
       )
-      return Object.assign({}, airline, {display})
+      arr.push(Object.assign({}, airline, {display}))
     })
+    return arr
   }
 
   const getSelectedAirports = () => {
-    Data.airports.map(airport => {
+    let arr = []
+    Data.airports.forEach(airport => {
       const display = !!getSelectedRoutes().find(
         route => route.src === airport.code || route.dest === airport.code
       )
-      return Object.assign({}, airport, {display})
+      arr.push(Object.assign({}, airport, {display}))
     })
+    return arr
   }
 
   const totalRoutes = getSelectedRoutes().length
@@ -63,6 +67,20 @@ const App = () => {
     return getSelectedRoutes().slice(pageNumber, sliceEnd)
   }
 
+  const airlineSelected = (value) => {
+    if (value > 0) {
+      setSelectedAirline(Number(value))
+    }
+  }
+
+  const airportSelected = (value) => setSelectedAirport(value)
+
+  const resetFilters = () => {
+    setSelectedAirline(0)
+    setSelectedAirport("all")
+  }
+
+
   return (
     <div>
       <div className="app">
@@ -70,7 +88,13 @@ const App = () => {
           <h1 className="title">Airline Routes</h1>
         </header>
         <section>
-          <Select />
+          <Select
+            airlines={getSelectedAirlines}
+            airports={getSelectedAirports}
+            selectedAirline={airlineSelected}
+            selectedAirport={airportSelected}
+            reset={resetFilters}
+          />
           <Table
             routes={getRoutesByPage()}
             columns={columns}
