@@ -85,36 +85,34 @@ const App = () => {
   }
 
   return (
-    <div>
-      <div className="app">
-        <header className="header">
-          <h1 className="title">Airline Routes</h1>
-        </header>
-        <section>
-          <Select
-            airlines={getSelectedAirlines}
-            airports={getSelectedAirports}
-            selectedAirline={airlineSelected}
-            selectedAirport={airportSelected}
-            enableReset={resetFilters}
-            disableReset={defaultsSelected()}
-          />
-          <Table
-            routes={getRoutesByPage()}
-            columns={columns}
-            format={formatValue}
-          />
-          <Pagination
-            pageNumber={pageNumber}
-            totalRoutes={totalRoutes}
-            setPageNumber={setPageNumber}
-            perPage={perPage}
-            start={startDisplay}
-            end={endDisplay}
-          />
-        </section>
-      </div >
-    </div>
+    <div className="app">
+      <header className="header">
+        <h1 className="title">Airline Routes</h1>
+      </header>
+      <section>
+        <Select
+          airlines={getSelectedAirlines}
+          airports={getSelectedAirports}
+          selectedAirline={airlineSelected}
+          selectedAirport={airportSelected}
+          enableReset={resetFilters}
+          disableReset={defaultsSelected()}
+        />
+        <Table
+          routes={getRoutesByPage()}
+          columns={columns}
+          format={formatValue}
+        />
+        <Pagination
+          pageNumber={pageNumber}
+          totalRoutes={totalRoutes}
+          setPageNumber={setPageNumber}
+          perPage={perPage}
+          start={startDisplay}
+          end={endDisplay}
+        />
+      </section>
+    </div >
   )
 }
 
