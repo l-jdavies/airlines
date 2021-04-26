@@ -8,9 +8,9 @@ const Table = ({routes, columns, format}) => {
   const bodyCells = routes.map(routeObj => {
     return (
       <tr key={Object.values(routeObj).join(":")}>
-        <td key={`airline:${routeObj.airline}`}>{format('airline', routeObj.airline)}</td>
-        <td key={`src:${routeObj.src}`}>{format('airport', routeObj.src)}</td>
-        <td key={`dest:${routeObj.dest}`}>{format('airport', routeObj.dest)}</td>
+        <td key={`airline:${routeObj.airline}`}>{format('airline', routeObj.airline).name}</td>
+        <td key={`src:${routeObj.src}`}>{format('airport', routeObj.src).name}</td>
+        <td key={`dest:${routeObj.dest}`}>{format('airport', routeObj.dest).name}</td>
       </tr>
     )
   })

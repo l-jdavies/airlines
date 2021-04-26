@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import Table from './components/Table'
 import Select from './components/Select'
 import Pagination from './components/Pagination'
+import Map from './components/Map'
 import Data from './data'
 import {getAirlineById, getAirportByCode} from './data'
 
@@ -26,8 +27,6 @@ const App = () => {
     {name: "Source Airport", property: "src"},
     {name: "Destination Airport", property: "dest"}
   ]
-
-  const displayAll = (selectedAirline === 0) && (selectedAirport === "all")
 
   const getSelectedRoutes = () => {
     return Data.routes.filter(route => {
@@ -90,6 +89,10 @@ const App = () => {
         <h1 className="title">Airline Routes</h1>
       </header>
       <section>
+        <Map
+          routes={getSelectedRoutes()}
+          format={formatValue}
+        />
         <Select
           airlines={getSelectedAirlines}
           airports={getSelectedAirports}
