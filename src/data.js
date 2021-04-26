@@ -1397,11 +1397,11 @@ const airports = [
 
 
 export function getAirlineById(id) {
-  return airlines.filter(airline => airline.id === id)[0].name
+  return airlines.filter(airline => airline.id === id)[0]
 }
 
 export function getAirportByCode(code) {
-  return airports.filter(airport => airport.code === code)[0].name
+  return airports.filter(airport => airport.code === code)[0]
 }
 
 export default {routes, airlines, airports};
